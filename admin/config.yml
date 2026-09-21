@@ -33,11 +33,11 @@ collections:
           - "World"
           - "Essays"
           - "Notes"
-
-      - label: "Date"
-        name: "date"
-        widget: "date"
-        format: "YYYY-MM-DD"
+- label: "Date"
+  name: "date"
+  widget: "datetime"
+  type: "date"
+  format: "YYYY-MM-DD"
 
       - label: "Cover image"
         name: "image"
