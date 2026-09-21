@@ -9,53 +9,46 @@ public_folder: "/images/uploads"
 collections:
   - name: "stories"
     label: "Stories"
-    file: "articles.json"
-    format: "json"
+    folder: "stories"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - label: "Articles"
-        name: "articles"
-        widget: "list"
-        fields:
-          - label: "ID"
-            name: "id"
-            widget: "string"
+      - label: "Title"
+        name: "title"
+        widget: "string"
 
-          - label: "Title"
-            name: "title"
-            widget: "string"
+      - label: "Subtitle"
+        name: "subtitle"
+        widget: "string"
+        required: false
 
-          - label: "Subtitle"
-            name: "subtitle"
-            widget: "string"
-            required: false
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Fashion"
+          - "Cinema"
+          - "Music"
+          - "Art"
+          - "World"
+          - "Essays"
+          - "Notes"
 
-          - label: "Category"
-            name: "category"
-            widget: "select"
-            options:
-              - "Fashion"
-              - "Cinema"
-              - "Music"
-              - "Art"
-              - "World"
-              - "Essays"
-              - "Notes"
+      - label: "Date"
+        name: "date"
+        widget: "date"
+        format: "YYYY-MM-DD"
 
-          - label: "Date"
-            name: "date"
-            widget: "date"
-            format: "YYYY-MM-DD"
+      - label: "Cover image"
+        name: "image"
+        widget: "image"
+        required: false
 
-          - label: "Cover image"
-            name: "image"
-            widget: "image"
-            required: false
+      - label: "Excerpt"
+        name: "excerpt"
+        widget: "text"
+        required: false
 
-          - label: "Excerpt"
-            name: "excerpt"
-            widget: "text"
-            required: false
-
-          - label: "Article"
-            name: "body"
-            widget: "markdown"
+      - label: "Article"
+        name: "body"
+        widget: "markdown"
