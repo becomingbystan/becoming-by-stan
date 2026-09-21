@@ -1,0 +1,61 @@
+backend:
+  name: github
+  repo: becomingbystan/becoming-by-stan
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "stories"
+    label: "Stories"
+    file: "articles.json"
+    format: "json"
+    fields:
+      - label: "Articles"
+        name: "articles"
+        widget: "list"
+        fields:
+          - label: "ID"
+            name: "id"
+            widget: "string"
+
+          - label: "Title"
+            name: "title"
+            widget: "string"
+
+          - label: "Subtitle"
+            name: "subtitle"
+            widget: "string"
+            required: false
+
+          - label: "Category"
+            name: "category"
+            widget: "select"
+            options:
+              - "Fashion"
+              - "Cinema"
+              - "Music"
+              - "Art"
+              - "World"
+              - "Essays"
+              - "Notes"
+
+          - label: "Date"
+            name: "date"
+            widget: "date"
+            format: "YYYY-MM-DD"
+
+          - label: "Cover image"
+            name: "image"
+            widget: "image"
+            required: false
+
+          - label: "Excerpt"
+            name: "excerpt"
+            widget: "text"
+            required: false
+
+          - label: "Article"
+            name: "body"
+            widget: "markdown"
