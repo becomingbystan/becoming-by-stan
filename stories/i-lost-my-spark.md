@@ -1,7 +1,7 @@
 ---
 title: I lost my spark
 subtitle: what happened to me?
-category: Essays
+category: Personal
 date: 2026-09-21
 image: ''
 excerpt: just me letting u know what my life looks like rn
