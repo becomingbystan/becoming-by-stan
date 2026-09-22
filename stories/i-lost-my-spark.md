@@ -4,14 +4,16 @@ subtitle: what happened to me?
 category: Essays
 date: 2026-09-21
 image: ''
-excerpt: life update because wtf is life rn
+excerpt: just me letting u know what my life looks like rn
 ---
 
 hi!
 
 I'm sorry to anyone who's about to read this post (if anybody ever reads it), it's not gonna be the most joyful one of my diary. 
 
-I don't even know where to begin. To be honest, I feel like September 2026 is probably like hell on earth. or maybe the whole of 2026? I don't know. I had happy moments this year, but what am I missing to be like this again? what happened? why am I like this? 
+I don't even know where to begin. 
+
+As the title says, I lost my spark, but what is it exactly? It was me day dreaming, happily getting dressed, going out, having fun with my friends, watching my favorite movies, listening to music so loudly, drawing, baking... But how did I come to lose it? To be honest, I feel like September 2026 is probably like hell on earth. or maybe the whole of 2026? I don't know. I had happy moments this year, but what am I missing to be like this again? what happened? why am I like this? 
 
 Past July my grandma passed away at 91. She was the love of my life and a role model for me. Only 2 people matter to me this much: her, and my mom (her daughter). When she passed away, on the 9th, my world fell apart. The day before her passing, prom took place, I was celebrating the end of high school and the results of the final exams. It all changed within 24 hours. What hurt the most is that I wasn't even able to attend her funerals. She lived in Portugal, and me in France. What do you mean I won't ever see my grandma ever again? I might not believe in God anymore, she did, so I find comfort in knowing she's peaceful now in Heaven, gathered with my grandpa (the wisest and calmest person this world has ever known). Since he passed away in 2023, she's been missing him so bad, she always said she wanted to be reunited with him. That's love. They were married for about over 60 or 70 years, isn't it crazy? 
 
