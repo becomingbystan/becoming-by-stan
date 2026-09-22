@@ -1,60 +1,56 @@
 backend:
-name: github
-repo: becomingbystan/becoming-by-stan
-branch: main
+  name: github
+  repo: becomingbystan/becoming-by-stan
+  branch: main
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "stories"
+    label: "Stories"
+    folder: "stories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
 
-* name: "stories"
-  label: "Stories"
-  folder: "stories"
-  create: true
-  slug: "{{slug}}"
-  fields:
+      - label: "Subtitle"
+        name: "subtitle"
+        widget: "string"
+        required: false
 
-  * label: "Title"
-    name: "title"
-    widget: "string"
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Fashion"
+          - "Cinema"
+          - "Music"
+          - "Art"
+          - "World"
+          - "Essays"
+          - "Notes"
+          - "Personal"
 
-  * label: "Subtitle"
-    name: "subtitle"
-    widget: "string"
-    required: false
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+        type: "date"
+        format: "YYYY-MM-DD"
 
-  * label: "Category"
-    name: "category"
-    widget: "select"
-    options:
+      - label: "Cover image"
+        name: "image"
+        widget: "image"
+        required: false
 
-    * "Art"
-    * "Cinema"
-    * "Fashion"
-    * "Music"
-    * "World"
-    * "Essays"
-    * "Notes"
-    * "Personal"
+      - label: "Excerpt"
+        name: "excerpt"
+        widget: "text"
+        required: false
 
-  * label: "Date"
-    name: "date"
-    widget: "datetime"
-    type: "date"
-    format: "YYYY-MM-DD"
-
-  * label: "Cover image"
-    name: "image"
-    widget: "image"
-    required: false
-
-  * label: "Excerpt"
-    name: "excerpt"
-    widget: "text"
-    required: false
-
-  * label: "Article"
-    name: "body"
-    widget: "markdown"
-
+      - label: "Article"
+        name: "body"
+        widget: "markdown"
