@@ -3,7 +3,7 @@ title: I lost my spark
 subtitle: what happened to me?
 category: Personal
 date: 2026-09-21
-image: ''
+image: /images/uploads/23fd8a11ea1a34c26fedb240d135d135.jpg
 excerpt: 'first post: this is what my life looks like at the moment'
 ---
 
