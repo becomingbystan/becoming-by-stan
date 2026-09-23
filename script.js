@@ -184,9 +184,6 @@ function card(a) {
     const meta =
       document.querySelector("#article-meta");
 
-    const image =
-      document.querySelector("#article-image");
-
     const body =
       document.querySelector("#article-body");
 
@@ -202,11 +199,6 @@ function card(a) {
 
     if (meta) {
       meta.textContent = a.date;
-    }
-
-    if (a.image && image) {
-      image.innerHTML =
-        `<img class="article-hero" src="${esc(a.image)}" alt="">`;
     }
 
     if (body) {
