@@ -8,6 +8,16 @@ const esc = s => (s || "").replace(/[&<>"']/g, c => ({
   "'": "&#39;"
 }[c]));
 
+function fixImagePath(path) {
+  if (!path) return "";
+
+  if (path.startsWith("/images/uploads/")) {
+    return "/becoming-by-stan" + path;
+  }
+
+  return path;
+}
+
 async function getArticles() {
   let articles = [];
 
@@ -78,7 +88,7 @@ function parseMarkdownArticle(raw, filename) {
     subtitle: get("subtitle"),
     category: get("category"),
     date: get("date"),
-    image: get("image"),
+    image: fixImagePath(get("image")),
     excerpt: get("excerpt"),
     body: markdownToHtml(body)
   };
@@ -203,89 +213,4 @@ function card(a) {
       body.innerHTML = a.body || "";
     }
   }
-
-  const form = document.querySelector("#story-form");
-
-  if (form) {
-    const dateInput = document.querySelector("#date");
-
-    if (dateInput) {
-      dateInput.value =
-        new Date().toISOString().slice(0, 10);
-    }
-
-    renderDrafts();
-
-    form.onsubmit = e => {
-      e.preventDefault();
-
-      const a = {
-        id: "local-" + Date.now(),
-        title: document.querySelector("#title").value,
-        subtitle: document.querySelector("#subtitle").value,
-        category: document.querySelector("#category").value,
-        image: document.querySelector("#image").value,
-        date: document.querySelector("#date").value,
-        excerpt: document.querySelector("#excerpt").value,
-        body: document.querySelector("#body").value
-      };
-
-      const d =
-        JSON.parse(localStorage.getItem(KEY) || "[]");
-
-      d.unshift(a);
-
-      localStorage.setItem(
-        KEY,
-        JSON.stringify(d)
-      );
-
-      form.reset();
-
-      if (dateInput) {
-        dateInput.value =
-          new Date().toISOString().slice(0, 10);
-      }
-
-      renderDrafts();
-
-      alert("Story saved in this browser.");
-    };
-  }
 })();
-
-function renderDrafts() {
-  const el = document.querySelector("#drafts");
-
-  if (!el) return;
-
-  const d =
-    JSON.parse(localStorage.getItem(KEY) || "[]");
-
-  el.innerHTML = d.length
-    ? d.map(a => `
-        <div class="draft">
-          <span>
-            <b>${esc(a.title)}</b><br>
-            <small>${esc(a.category)} · ${esc(a.date)}</small>
-          </span>
-          <button onclick="deleteDraft('${a.id}')">
-            Delete
-          </button>
-        </div>
-      `).join("")
-    : "<p>No browser stories yet.</p>";
-}
-
-function deleteDraft(id) {
-  const d =
-    JSON.parse(localStorage.getItem(KEY) || "[]")
-      .filter(a => a.id !== id);
-
-  localStorage.setItem(
-    KEY,
-    JSON.stringify(d)
-  );
-
-  renderDrafts();
-}
