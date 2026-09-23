@@ -52,12 +52,19 @@ async function getArticles() {
             articles.push(article);
           }
         } catch (error) {
-          console.error("Could not load article:", file.name, error);
+          console.error(
+            "Could not load article:",
+            file.name,
+            error
+          );
         }
       }
     }
   } catch (error) {
-    console.error("Could not connect to GitHub:", error);
+    console.error(
+      "Could not connect to GitHub:",
+      error
+    );
   }
 
   try {
@@ -67,7 +74,10 @@ async function getArticles() {
 
     articles.push(...localArticles);
   } catch (error) {
-    console.error("Could not read local articles:", error);
+    console.error(
+      "Could not read local articles:",
+      error
+    );
   }
 
   const unique = [];
@@ -115,10 +125,19 @@ function parseMarkdownArticle(raw, filename) {
   }
 
   const title = get("title");
+  const category = get("category");
+
+  /*
+    Drafts are kept in GitHub and visible in Sveltia,
+    but they are never loaded onto the public website.
+  */
+  if (category.toLowerCase() === "drafts") {
+    return null;
+  }
 
   /*
     If Article is empty, use the title as the article content.
-    This is especially useful for Notes / quotations.
+    Useful for short Notes / quotations.
   */
   const articleContent =
     body || title;
@@ -127,7 +146,7 @@ function parseMarkdownArticle(raw, filename) {
     id: filename.replace(/\.md$/i, ""),
     title: title,
     subtitle: get("subtitle"),
-    category: get("category"),
+    category: category,
     date: get("date"),
     image: fixImagePath(get("image")),
     excerpt: get("excerpt"),
@@ -142,6 +161,9 @@ function markdownToHtml(text) {
 
   let html = text;
 
+  /*
+    Images inserted manually inside the Article field.
+  */
   html = html.replace(
     /!\[([^\]]*)\]\(([^)]+)\)/g,
     (match, alt, src) => {
@@ -157,15 +179,24 @@ function markdownToHtml(text) {
     }
   );
 
+  /*
+    Headings
+  */
   html = html
     .replace(/^### (.*)$/gm, "<h3>$1</h3>")
     .replace(/^## (.*)$/gm, "<h2>$1</h2>")
     .replace(/^# (.*)$/gm, "<h1>$1</h1>");
 
+  /*
+    Bold / italic
+  */
   html = html
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>");
 
+  /*
+    Paragraphs
+  */
   html = html
     .split(/\n\s*\n/)
     .map(block => {
@@ -226,6 +257,9 @@ function card(article) {
 (async () => {
   const articles = await getArticles();
 
+  /*
+    HOME PAGE
+  */
   const latest = document.querySelector("#latest");
 
   if (latest) {
@@ -244,6 +278,9 @@ function card(article) {
     }
   }
 
+  /*
+    CATEGORY PAGE
+  */
   const categoryTitle =
     document.querySelector("#category-title");
 
@@ -273,6 +310,9 @@ function card(article) {
     }
   }
 
+  /*
+    ARTICLE PAGE
+  */
   const articleTitle =
     document.querySelector("#article-title");
 
