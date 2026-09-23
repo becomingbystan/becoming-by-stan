@@ -1,10 +1,10 @@
 ---
-title: Do I want to kms?
-subtitle: no but really?
+title: I just want things to be easy
+subtitle: how am I supposed to do this?
 category: Personal
 date: 2026-09-23
 image: /becoming-by-stan/images/uploads/f247bf1a3c1901197f9be6c0222dc6ce.jpg
-excerpt: it's a bit dramatic
+excerpt: still not joyful but raw emotions
 ---
 
 In my first post, I told you about how bad things were going for me. To be honest, life is not at its peak right now, and I know that brighter days are ahead. Deep down I know it. Yet, I still catch myself sometimes thinking that this life is too much of a burden to keep going and to keep fighting. I just want things to be easy. 
