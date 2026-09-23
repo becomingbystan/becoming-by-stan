@@ -9,7 +9,6 @@ const esc = s =>
     "'": "&#39;"
   }[c]));
 
-/* Fix image paths for GitHub Pages */
 function fixImagePath(path) {
   if (!path) return "";
 
@@ -30,7 +29,6 @@ function fixImagePath(path) {
   return path;
 }
 
-/* Get all published articles from GitHub */
 async function getArticles() {
   let articles = [];
 
@@ -62,7 +60,6 @@ async function getArticles() {
     console.error("Could not connect to GitHub:", error);
   }
 
-  /* Keep compatibility with any old local drafts */
   try {
     const localArticles = JSON.parse(
       localStorage.getItem(KEY) || "[]"
@@ -73,7 +70,6 @@ async function getArticles() {
     console.error("Could not read local articles:", error);
   }
 
-  /* Remove duplicates */
   const unique = [];
   const ids = new Set();
 
@@ -84,7 +80,6 @@ async function getArticles() {
     }
   }
 
-  /* Newest first */
   unique.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
@@ -92,7 +87,6 @@ async function getArticles() {
   return unique;
 }
 
-/* Read a Markdown article */
 function parseMarkdownArticle(raw, filename) {
   const match = raw.match(
     /^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/
@@ -120,19 +114,27 @@ function parseMarkdownArticle(raw, filename) {
       : "";
   }
 
+  const title = get("title");
+
+  /*
+    If Article is empty, use the title as the article content.
+    This is especially useful for Notes / quotations.
+  */
+  const articleContent =
+    body || title;
+
   return {
     id: filename.replace(/\.md$/i, ""),
-    title: get("title"),
+    title: title,
     subtitle: get("subtitle"),
     category: get("category"),
     date: get("date"),
     image: fixImagePath(get("image")),
     excerpt: get("excerpt"),
-    body: markdownToHtml(body)
+    body: markdownToHtml(articleContent)
   };
 }
 
-/* Convert the Markdown used by Sveltia into HTML */
 function markdownToHtml(text) {
   if (!text) {
     return "";
@@ -140,10 +142,6 @@ function markdownToHtml(text) {
 
   let html = text;
 
-  /*
-    Images inserted inside the Article field
-    become normal article images.
-  */
   html = html.replace(
     /!\[([^\]]*)\]\(([^)]+)\)/g,
     (match, alt, src) => {
@@ -159,21 +157,15 @@ function markdownToHtml(text) {
     }
   );
 
-  /* Headings */
   html = html
     .replace(/^### (.*)$/gm, "<h3>$1</h3>")
     .replace(/^## (.*)$/gm, "<h2>$1</h2>")
     .replace(/^# (.*)$/gm, "<h1>$1</h1>");
 
-  /* Bold and italic */
   html = html
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>");
 
-  /*
-    Paragraphs:
-    Two line breaks = new paragraph.
-  */
   html = html
     .split(/\n\s*\n/)
     .map(block => {
@@ -183,10 +175,6 @@ function markdownToHtml(text) {
         return "";
       }
 
-      /*
-        Don't wrap standalone HTML images/headings
-        inside a paragraph.
-      */
       if (
         block.startsWith("<img") ||
         block.startsWith("<h1") ||
@@ -203,7 +191,6 @@ function markdownToHtml(text) {
   return html;
 }
 
-/* Create an article card */
 function card(article) {
   return `
     <a
@@ -236,13 +223,9 @@ function card(article) {
   `;
 }
 
-/* Main site logic */
 (async () => {
   const articles = await getArticles();
 
-  /*
-    HOME PAGE
-  */
   const latest = document.querySelector("#latest");
 
   if (latest) {
@@ -261,9 +244,6 @@ function card(article) {
     }
   }
 
-  /*
-    CATEGORY PAGE
-  */
   const categoryTitle =
     document.querySelector("#category-title");
 
@@ -283,9 +263,7 @@ function card(article) {
           );
 
     const container =
-      document.querySelector(
-        "#category-stories"
-      );
+      document.querySelector("#category-stories");
 
     if (container) {
       container.innerHTML =
@@ -295,17 +273,12 @@ function card(article) {
     }
   }
 
-  /*
-    ARTICLE PAGE
-  */
   const articleTitle =
     document.querySelector("#article-title");
 
   if (articleTitle) {
     const id =
-      new URLSearchParams(location.search).get(
-        "id"
-      );
+      new URLSearchParams(location.search).get("id");
 
     const article =
       articles.find(
@@ -362,13 +335,6 @@ function card(article) {
     }
 
     if (body) {
-      /*
-        IMPORTANT:
-        The cover image is NOT inserted here.
-
-        Only images manually inserted into
-        the Sveltia Article field appear here.
-      */
       body.innerHTML =
         article.body || "";
     }
