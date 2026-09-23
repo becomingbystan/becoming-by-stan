@@ -96,6 +96,14 @@ function parseMarkdownArticle(raw, filename) {
 
 function markdownToHtml(text) {
   return text
+    .replace(
+      /!\[([^\]]*)\]\(([^)]+)\)/g,
+      (match, alt, src) => {
+        const imageSrc = fixImagePath(src);
+
+        return `<img class="article-image" src="${esc(imageSrc)}" alt="${esc(alt)}">`;
+      }
+    )
     .replace(/^### (.*)$/gm, "<h3>$1</h3>")
     .replace(/^## (.*)$/gm, "<h2>$1</h2>")
     .replace(/^# (.*)$/gm, "<h1>$1</h1>")
@@ -153,10 +161,15 @@ function card(a) {
       a => n === "All stories" || a.category === n
     );
 
-    document.querySelector("#category-stories").innerHTML =
-      filtered.length
-        ? filtered.map(card).join("")
-        : "<p>No stories yet.</p>";
+    const container =
+      document.querySelector("#category-stories");
+
+    if (container) {
+      container.innerHTML =
+        filtered.length
+          ? filtered.map(card).join("")
+          : "<p>No stories yet.</p>";
+    }
   }
 
   const at = document.querySelector("#article-title");
