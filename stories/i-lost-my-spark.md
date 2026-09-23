@@ -4,7 +4,7 @@ subtitle: what happened to me?
 category: Personal
 date: 2026-09-21
 image: ''
-excerpt: just me letting u know what my life looks like rn
+excerpt: 'first post: this is what my life looks like at the moment.'
 ---
 
 hi!
