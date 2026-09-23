@@ -4,7 +4,7 @@ backend:
   branch: main
 
 media_folder: "images/uploads"
-public_folder: "/images/uploads"
+public_folder: "/becoming-by-stan/images/uploads"
 
 collections:
   - name: "stories"
